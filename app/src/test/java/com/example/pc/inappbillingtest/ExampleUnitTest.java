@@ -1,4 +1,4 @@
-package com.example.pc.inappbillingtest;
+package com.yellowgreen.pc.inappbillingtest;
 
 import org.junit.Test;
 

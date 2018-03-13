@@ -1,4 +1,4 @@
-package com.example.pc.inappbillingtest;
+package com.yellowgreen.pc.inappbillingtest;
 
 import android.content.Context;
 import android.support.test.InstrumentationRegistry;
@@ -21,6 +21,6 @@ public class ExampleInstrumentedTest {
         // Context of the app under test.
         Context appContext = InstrumentationRegistry.getTargetContext();
 
-        assertEquals("com.example.pc.inappbillingtest", appContext.getPackageName());
+        assertEquals("com.yellowgreen.pc.inappbillingtest", appContext.getPackageName());
     }
 }

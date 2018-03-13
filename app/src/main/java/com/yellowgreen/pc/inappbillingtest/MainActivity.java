@@ -1,4 +1,4 @@
-package com.example.pc.inappbillingtest;
+package com.yellowgreen.pc.inappbillingtest;
 
 import android.app.Activity;
 import android.content.Intent;
@@ -16,19 +16,26 @@ import com.anjlab.android.iab.v3.TransactionDetails;
 public class MainActivity extends Activity implements BillingProcessor.IBillingHandler {
     BillingProcessor bp;
     Button buy;
+    String GP_LICENSE_KEY;
+    String ProductID;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
 
-        bp = new BillingProcessor(this, null, this);
+        GP_LICENSE_KEY = "MIIBIjANBgkqhkiG9w0BAQEFAAOCAQ8AMIIBCgKCAQEAtMX0KeCZR2uuHD5W5USBzC9/z153dQ0RX7BQbdFaqsNccoR9C8l4PyyrF61MxhcYO7ElLAZPvrB0DPE5BwEVDBh6dXp62GoDG3wiQ3qX1jwK1rwRa+Oa6ZyH4YcwWU5L/cZbhAF2axuCHTrkrAKct/LSIn6295IIqnGyeFweY90ieAtMuW9wVVlYXmI1jrbqCJtLhuXTky1iNb6cydb5UMznhRKWOFfab6XWqyLl5X+p0saUTDOtZrymLfLMy0QRzlo4wDrsv2QwJ5rcZTUzU0aw2zmCKpY6WVBjEjAP64t4aCR1o2ZJVpQJuSoKvT9vC+GmfGzytqsI8aE7EcT0ewIDAQAB";
+        ProductID = "in_app_billing_test";
+        bp = new BillingProcessor(this, GP_LICENSE_KEY, this);
         buy = (Button)findViewById(R.id.buy);
 
         buy.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                bp.purchase(MainActivity.this, "android.test.purchased");
+                if (bp.isPurchased(ProductID)) {
+                    bp.consumePurchase(ProductID);
+                }
+                bp.purchase(MainActivity.this, ProductID);
             }
         });
     }
@@ -45,8 +52,6 @@ public class MainActivity extends Activity implements BillingProcessor.IBillingH
     public void onPurchaseHistoryRestored() {
 //        깃헙 설명에보면 Called when purchase history was restored and the list of all owned PRODUCT ID's was loaded from Google Play
 //        라고 되어있는데 언제 쓸런지는 잘 모르겠다.
-
-
 
     }
 

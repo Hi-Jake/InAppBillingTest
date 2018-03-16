@@ -33,9 +33,11 @@ public class MainActivity extends Activity implements BillingProcessor.IBillingH
             @Override
             public void onClick(View view) {
                 if (bp.isPurchased(ProductID)) {
-                    bp.consumePurchase(ProductID);
+//                    bp.consumePurchase(ProductID);
+                    Toast.makeText(MainActivity.this, "이미 구입하신 상품 입니다.", Toast.LENGTH_SHORT).show();
+                }else {
+                    bp.purchase(MainActivity.this, ProductID);
                 }
-                bp.purchase(MainActivity.this, ProductID);
             }
         });
     }
